@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class ExampleModClient implements ClientModInitializer {
@@ -14,15 +15,20 @@ public class ExampleModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Open ClickGUI",
+				"key.modid.open_gui",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_RIGHT_SHIFT,
-				"key.category." + ExampleMod.MOD_ID
+				KeyBinding.Category.create(Identifier.of("modid", "key_categories/modid")),
+				0
 		));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (openGuiKey.wasPressed()) {
-				client.setScreen(new TestClickGuiScreen());
+				if (client.currentScreen instanceof TestClickGuiScreen) {
+					client.setScreen(null);
+				} else {
+					client.setScreen(new TestClickGuiScreen());
+				}
 			}
 		});
 	}
