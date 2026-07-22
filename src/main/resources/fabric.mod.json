@@ -2,10 +2,10 @@
 	"schemaVersion": 1,
 	"id": "modid",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Test ClickGUI",
+	"description": "A simple Fabric mod for 1.21.11 that opens a click-style GUI with a test button using Right Shift.",
 	"authors": [
-		"Me!"
+		"Your Name"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
